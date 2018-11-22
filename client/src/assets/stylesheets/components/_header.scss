@@ -1,0 +1,139 @@
+.header {
+    font-size: 1.4rem;
+    height: 8rem;
+    background-color: #232526;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    @include respond(phone) {
+        flex-wrap: wrap;
+        align-content: space-around;
+        justify-content: space-around;
+        height: 16rem;
+    }
+}
+
+.logo {
+    height: 3.25rem;
+    margin-left: 3rem;
+    cursor: pointer;
+
+    @include respond(phone) {
+        height: 2.5rem;
+    }
+}
+
+.preview {
+    background-color: #000000d6;
+    z-index: 1000;
+    position: absolute;
+    top: 50px;
+    list-style: none;
+    padding: 2rem;
+    text-transform: uppercase;
+    border-bottom: 4px $color-primary-dark solid;
+    width: 90%;
+}
+
+.preview-itm {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.search {
+    flex: 0 0 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    @include respond(phone) {
+        order: 1;
+        flex: 0 0 100%;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+        margin-right: 1.2rem;
+    }
+
+    &__input {
+        font-family: inherit;
+        font-size: inherit;
+        color: $color-grey-dark-3;
+        background-color: $color-grey-light-2;
+        border: none;
+        padding: 1.25rem 2rem;
+        border-radius: 10rem;
+        width: 90%;
+        transition: all .2s;
+        margin-right: -3.5rem;
+
+        &:focus {
+            outline: none;
+            width: 100%;
+            background-color: $color-grey-light-3;
+        }
+
+        &::-webkit-input-placeholder {
+            font-weight: 400;
+            color: $color-grey-light-4;
+        }
+    }
+
+    &__input:focus + &__button {
+        background-color: $color-grey-light-3;
+    }
+
+    &__button{
+        border: none;
+        background-color: $color-grey-light-2;
+    
+        &:focus {
+            outline: none;
+        }
+
+        &:active {
+            transform: translateY(2px);
+        }
+    }
+}
+
+.user-nav {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+
+    & > * {
+        padding: 0 1.5rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    & > *:hover {
+        background: linear-gradient(to right bottom, #232526, #414345);
+    }
+
+    &__user-photo {
+        height: 5.75rem;
+        width: 5.75rem;
+        border-radius: 100%;
+    }
+
+    &__user-name {
+        margin-left: 1rem;    
+    }
+
+    &__langage-en {
+        margin-right: .5rem;
+    }
+
+    &__langage-fr {
+        margin-left: .5rem;
+    }
+
+    @include respond(phone) {
+        padding: 0;
+    }
+}

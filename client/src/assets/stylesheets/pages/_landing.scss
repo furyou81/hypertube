@@ -1,0 +1,40 @@
+.landing {
+    background-image: linear-gradient(
+        to right bottom, 
+        rgba($color-grey-dark-1, 0.7), 
+        rgba($color-grey-dark-1, 0.7)), 
+    url(../img/poster.jpg);
+    background-size: cover;
+    background-position: top;
+    height: 100vh;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow:hidden;
+
+    &__langage {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 1.5rem;
+
+        &--fr {
+            margin-left: .5rem;
+        }
+
+        &--en {
+            margin-right: .5rem;
+        }
+    }
+
+    &__heading {
+        display: flex;
+        font-weight: 100;
+        justify-content: center;
+        font-size: 7rem;
+        text-transform: uppercase;
+        }
+}

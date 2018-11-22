@@ -1,0 +1,198 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; // center verticaly
+}
+
+#toggle-1 {
+    z-index: 2;
+    height: 2rem;
+    width: 2rem;
+    opacity: 0;
+}
+
+.icon {
+    margin-bottom: -2rem;
+}
+
+.card {
+    order: -1;
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    position: relative;
+    height: 59.5rem;
+    width: 33rem;
+
+    &__side {
+        height: 59.5rem;
+        width: 100%;
+        background-color: $color-white-tranparent;
+        box-shadow: 0 1rem 5rem rgba(250, 248, 248, 0.3);
+        transition: all 2s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        backface-visibility: hidden;
+        border-radius: 3px;
+        -webkit-backface-visibility: hidden;
+
+        &--front {
+            background-color: $color-white-tranparent;
+        }
+
+        &--back {
+            background-color: $color-white-tranparent;
+            transform: rotateY(180deg);
+        }
+    }
+
+    &__text {
+        font-family: 'Lato', sans-serif;
+        font-size: 1.6rem;
+        text-transform: uppercase;
+        height: 12rem;
+        padding: 2rem;
+        color: $color-white;
+        background-color: $color-primary-light-3;
+        width: 100%;
+    }
+
+    &__text-span {
+        padding-left: 16rem;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+        font-weight: 300;
+
+        &--1 {
+            background-image: linear-gradient(
+            to right bottom, 
+            rgba($color-primary-light-3, 0.5), 
+            rgba($color-primary-dark, 0.5));
+        }
+    }
+
+    &__form {
+        margin-top: 2rem;
+        margin-left: 2rem;
+        margin-right: 2rem;
+
+        &--picture {
+            margin-top: -6rem;
+
+            &-block {
+                border: solid .3rem $color-white;
+                width: 100px;
+                height: auto;
+                margin-left: 2rem;
+                margin-bottom: 2rem;
+                background-color: $color-white;
+                position: relative;
+                overflow: hidden;
+
+                &-img {
+                    max-width: 150%;
+                    max-height: 200%;
+                    position: absolute;
+                    object-fit: cover;
+                }
+
+                &-text {
+                    color: $color-white;
+                }
+
+                &-input {
+                    display: flex;
+                    justify-content: center;
+                    color: transparent;
+                    
+                }
+            }
+        }
+
+        &--field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &--input {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+
+
+            &-label {
+                font-size: 1.3rem;
+                color: $color-grey-dark-2;
+            }
+
+            &-input {
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-bottom: solid 0.1rem $color-primary-light-3;
+                opacity: 0.7;
+            } 
+
+            & input {
+                line-height: 2.4rem;
+            }
+
+            &-error {
+                color: $color-primary-light-1;
+            } 
+
+            &-success {
+                color: $color-primary-light-1;
+            } 
+        }
+    }
+
+    &__forgot {
+        display: flex;
+        justify-content: center; 
+        margin-top: 0rem;
+        font-size: 1.2rem;
+        color: $color-grey-dark-2;
+    }
+
+    &__OAuth{
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center; 
+
+        &--icon {
+           margin-left: .5rem;
+           margin-right: .5rem;
+           width: 1.5rem;
+        }
+
+        &--icon42 {
+            margin-top: .3rem;
+            margin-left: .5rem;
+            margin-right: .5rem;
+            width: 1.7rem;
+            height: 1.7rem;
+            filter: opacity(.5);
+        }
+    }
+
+    &__newClient {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 13rem;
+        font-size: 1.6rem;
+        color: $color-grey-dark-2;
+    }
+}
+
+input[type=checkbox]:checked ~ div {    
+    .card__side--front {
+        transform: rotateY(180deg);
+    }
+
+    .card__side--back {
+        transform: rotateY(0);
+    }
+}

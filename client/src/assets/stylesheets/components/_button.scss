@@ -1,0 +1,116 @@
+.btn {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: inherit;
+    text-decoration: none;
+    outline: 0;
+}
+
+.btn-primary {
+    display: flex;
+    justify-content: center; // justify text
+    border: none;
+
+    &--pink {    
+        margin: 2rem 8rem;
+        border-radius: 10rem;
+        padding: 1rem;
+        font-size: 1.3rem;
+        border: none;
+        text-transform: uppercase;
+        background-color: $color-primary-light-3;
+
+        &:hover {
+            transform: translateY(-3px);
+            color: $color-white;
+            box-shadow: 0 1em 2rem rgba($color-black, .2);
+    
+            &::after {
+                transform: scaleX(1.4) scaleY(1.6);
+                opacity: 0;
+            }
+        }
+    
+        &:active {
+            transform: translateY(-1px);
+            box-shadow: 0 .5rem 1rem rgba($color-black, .2);
+        }
+
+    }
+
+}
+
+.btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 10px 15px;
+
+    &__icon {
+        margin-right: .5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    &--red {
+        align-self: flex-start;
+        background-color: $color-red;
+    }
+
+    &--darkerred {
+        align-self: flex-start;
+        background-color: $color-primary-light-3;
+    }
+}
+
+.li-video {
+    margin:auto;
+    list-style-type: none;
+    margin-top:10px;
+    margin-bottom:10px;
+    background-color:$color-grey-dark-2;
+    width:10%;
+    cursor: pointer;
+}
+
+.li-video:hover {
+    background-color:$color-primary-light-2;    
+}
+
+.li-video-selected {
+    margin:auto;
+    cursor: default;
+    list-style-type: none;
+    margin-top:10px;
+    margin-bottom:10px;
+    background-color:$color-green;
+    width:10%;
+}
+
+.add-comment {
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 10px 15px;
+    color: $color-white;
+    background-color: $color-primary-light-3;
+    width: 100%;
+}
+
+.add-comment:hover {
+    color: $color-grey-dark-1;
+    background-color: $color-grey-light-1;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.pointerBis {
+    flex: 0 1 25%;
+    position: relative;
+    cursor: pointer;
+}

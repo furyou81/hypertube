@@ -1,0 +1,14 @@
+.edit-profile {
+    height: 80vh;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+
+    @include respond(phone) {
+        flex-direction: column;
+        align-items: center;
+        height: 150vh;
+    }
+}
