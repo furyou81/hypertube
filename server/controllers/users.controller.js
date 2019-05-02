@@ -30,16 +30,22 @@ exports.getAllUsers = (req, res) => {
 exports.createUser = (req, res) => {
     if (!req.body.path) {
         res.sendStatus(400);
+        return ;
     } else {
         // find existing user by username
         Users.findOne({"username": req.body.values.username}, (err, user) => {
-            if (err) 
+            if (err) {
                 res.sendStatus(500);
+                return ;
+            }
+
+
             if (!user) {
                 // find existing user by email
                 Users.findOne({ "email": req.body.values.email }, (err, user) => {
                     if (err) {
                         res.sendStatus(500);
+                        return ;
                     }
                     if (!user) {
                         //add user info 
@@ -80,19 +86,23 @@ exports.createUser = (req, res) => {
                                             if (err) {
                                                 res.sendStatus(500);
                                                 console.log('Message sent: ' + info.response);
+                                                return ;
                                             }
                                         });
                                         res.status(200).json({ message: 'Please check your mailbox' });
+                                        return ;
                                     }
                                 });    
                             }
                         });  
                     } else {
                         res.sendStatus(409);
+                        return ;
                     }   
                 })
             } else {
                 res.sendStatus(409);
+                return ;
             }
         })
     }
@@ -152,10 +162,14 @@ exports.updateUser = (req, res) => {
         }
     }
     Users.findOneAndUpdate({_id :req.params.id}, update, {new: true}, (err, user) => {
-        if (err)
-            res.sendStatus(500);     
+        if (err) {
+            res.sendStatus(500);
+            return ;
+        }
+
         if (!user) {
             res.sendStatus(404);  
+            return ;
         } else {
             fs.readdir('uploads', (err, files) => {
                 if (err) throw err;
@@ -169,6 +183,7 @@ exports.updateUser = (req, res) => {
                 message: 'Your information was updated successfully',
                 user: user.toJSON()
             });
+            return ;
         }
     });
 }

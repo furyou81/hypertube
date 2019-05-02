@@ -54,6 +54,7 @@ exports.sendMessage = (req, res) => {
     Users.findOne({ "email": email }, (err, user) => {
         if (err) {
             res.sendStatus(500);
+            return ;
         }
         if (!user) {
             res.sendStatus(404);
@@ -63,6 +64,7 @@ exports.sendMessage = (req, res) => {
             Token.findOneAndUpdate({"userID": user._id}, {$set: {"resetToken": resetToken}}, {new: true}, (err, existingToken) => {
                 if (!existingToken) {
                     res.sendStatus(500);
+                    return ;
                 } else {
                     var mail = {
                         from: "matcha.appli@gmail.com",
@@ -79,6 +81,7 @@ exports.sendMessage = (req, res) => {
                         if (err) {
                             res.sendStatus(500);
                             console.log('Message sent: ' + info.response);
+                            return ;
                         }
                     });
                     res.status(200).json({ message: 'Please check your mailbox' });
@@ -95,6 +98,7 @@ exports.changePassword = (req, res) => {
         Users.findOne({"_id": req.body.user_id}, (err, user) => {
             if (err) {
                 res.sendStatus(500);
+                return ;
             }
             if (!user) {
                 res.sendStatus(404);
@@ -116,19 +120,24 @@ exports.changePassword = (req, res) => {
 
 exports.verifyUpload = async (req, res) => {
     if (!req.file) {
-        console.log("errrrr", req)
-        res.sendStatus(500);
+        res.sendStatus(403);
+        return ;
     }
-    await sharp(fs.readFileSync(req.file.path))
-        .resize(360, 360)
-        .toBuffer(function(err, buffer) {
-        fs.writeFile(req.file.path, buffer, function(e) {
-        })
-    });
+    try {
+        await sharp(fs.readFileSync(req.file.path))
+            .resize(360, 360)
+            .toBuffer(function(err, buffer) {
+            fs.writeFile(req.file.path, buffer, function(e) {
+            })
+        });
+    } catch (e) {
+        res.sendStatus(403);
+        return ;
+    }
     let buffer = fs.readFileSync(req.file.path)
     let mimetype = req.file.mimetype;
     let size = req.file.size;
-    if(tools.isValid(buffer, mimetype, size)) {
+    if (tools.isValid(buffer, mimetype, size)) {
         async function UploadCloudinaryPhoto(src, basename) {
             cloudinary.config({ 
                 cloud_name: keys.CLOUD_NAME, 
@@ -139,10 +148,12 @@ exports.verifyUpload = async (req, res) => {
                 const ret = await cloudinary.v2.uploader.upload(src,  {public_id: "hypertube/" + basename});
                 if (ret) {
                     res.status(200).json(ret.secure_url);
+                    return ;
                 }
             } catch (error) {
                 console.log("oooo", errror)
                 res.sendStatus(500);
+                return ;
             }
         }
         const src = req.file.path;

@@ -9,14 +9,14 @@ exports.addSeen = async (req, res) => {
             }
             const toAddInDb = new MovieSeen({userID: req.user._id ,imdbid: req.body.imdbid, date: Date.now()});
             toAddInDb.save(err => {
-            if (err) {
-                console.log("error not added in db", err)
-                res.status(400).json({msg: "failed to add in db"})
-            } else {
-                console.log("added in db")
-                res.status(200).json(toAddInDb)
-            }
-        })
+                if (err) {
+                    console.log("error not added in db", err)
+                    res.status(400).json({msg: "failed to add in db"})
+                } else {
+                    console.log("added in db")
+                    res.status(200).json(toAddInDb)
+                }
+            });
         } else {console.log(err);
             res.status(400).json("ERROR ")
         }

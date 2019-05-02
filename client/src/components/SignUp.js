@@ -32,6 +32,10 @@ class SignUp extends Component {
         const { t } = this.props;
         let message;
         const data = new FormData();
+
+        if (!files || files.lenght === 0)
+            return ;
+
         data.append('file', files[0]);
         data.append('filename', files[0].name);
         axios.post('http://localhost:8080/api/verification/upload', data)
